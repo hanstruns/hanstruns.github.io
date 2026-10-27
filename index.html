@@ -1,17 +1,863 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2496991076440019" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <title>Mis Juegos H5</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101223">
+  <meta name="description"
+        content="Juegos web para compartir con amigos. Elige un juego y empieza a jugar desde tu navegador.">
+
+  <title>Mis Juegos H5 · Juega y comparte</title>
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2496991076440019"
+    crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --fondo: #101223;
+      --panel: #191c32;
+      --texto: #f4f5ff;
+      --secundario: #aeb3ce;
+      --borde: rgba(255,255,255,.1);
+      --acento: #a99aff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(ellipse at 10% 0%, #302451 0%, transparent 45%),
+        radial-gradient(ellipse at 100% 45%, #142b40 0%, transparent 40%),
+        var(--fondo);
+      color: var(--texto);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a,
+    input {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--acento);
+      outline-offset: 5px;
+    }
+
+    .contenedor {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .cabecera {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 28px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: -.6px;
+    }
+
+    .marca-icono {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #a99aff;
+      font-size: 25px;
+      box-shadow: 0 6px 24px #a99aff25;
+    }
+
+    .marca span:last-child {
+      color: var(--acento);
+    }
+
+    .enlace-cabecera {
+      color: var(--secundario);
+      font-size: 14px;
+    }
+
+    .enlace-cabecera:hover {
+      color: white;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .presentacion {
+      padding: 76px 0 52px;
+      max-width: 800px;
+    }
+
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid #a99aff35;
+      border-radius: 999px;
+      background: #a99aff0d;
+      color: #c4baff;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .punto {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #82e9c0;
+      box-shadow: 0 0 12px #82e9c060;
+    }
+
+    h1 {
+      margin: 22px 0;
+      font-size: clamp(42px, 6.5vw, 76px);
+      line-height: 1.06;
+      letter-spacing: -3px;
+    }
+
+    h1 span {
+      color: var(--acento);
+    }
+
+    .presentacion p {
+      max-width: 590px;
+      margin: 0;
+      color: var(--secundario);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .biblioteca {
+      padding-bottom: 60px;
+      scroll-margin-top: 24px;
+    }
+
+    .barra-biblioteca {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .titulo-biblioteca {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -.7px;
+    }
+
+    .contador {
+      display: grid;
+      place-items: center;
+      min-width: 30px;
+      height: 30px;
+      padding-inline: 8px;
+      border-radius: 10px;
+      background: #ffffff0a;
+      color: var(--secundario);
+      font-size: 13px;
+    }
+
+    .buscador {
+      position: relative;
+      width: min(100%, 310px);
+    }
+
+    .buscador svg {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 19px;
+      height: 19px;
+      color: var(--secundario);
+      pointer-events: none;
+    }
+
+    .buscador input {
+      width: 100%;
+      padding: 13px 15px 13px 44px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: #ffffff05;
+      color: white;
+    }
+
+    .buscador input::placeholder {
+      color: #949bbd;
+    }
+
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .filtro {
+      padding: 9px 16px;
+      border: 1px solid var(--borde);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--secundario);
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .filtro:hover {
+      background: #ffffff0a;
+      color: white;
+    }
+
+    .filtro[aria-pressed="true"] {
+      border-color: var(--acento);
+      background: var(--acento);
+      color: #17112d;
+      font-weight: 700;
+    }
+
+    .juegos {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .tarjeta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      border-radius: 24px;
+      background: var(--panel);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-6px);
+      border-color: var(--color);
+      box-shadow: 0 20px 45px #00000035;
+    }
+
+    .portada {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 205px;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--degradado);
+    }
+
+    .portada::before,
+    .portada::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 220px;
+      height: 220px;
+      border: 1px solid #ffffff18;
+      border-radius: 50%;
+    }
+
+    .portada::before {
+      top: -100px;
+      right: -50px;
+    }
+
+    .portada::after {
+      bottom: -150px;
+      left: -40px;
+      width: 280px;
+      height: 280px;
+    }
+
+    .icono-juego {
+      display: grid;
+      place-items: center;
+      width: 104px;
+      height: 104px;
+      border: 1px solid #ffffff25;
+      border-radius: 30px;
+      background: #ffffff10;
+      font-size: 58px;
+      box-shadow: 0 15px 35px #00000020;
+      transform: rotate(-7deg);
+      transition: transform .25s;
+    }
+
+    .tarjeta:hover .icono-juego {
+      transform: rotate(0) scale(1.06);
+    }
+
+    .numero {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      color: #ffffff85;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .contenido {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 25px;
+    }
+
+    .categoria {
+      color: var(--color);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 12px 0 10px;
+      font-size: 25px;
+      letter-spacing: -.7px;
+    }
+
+    .descripcion {
+      margin: 0 0 24px;
+      color: var(--secundario);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pie-tarjeta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .modalidad {
+      color: var(--secundario);
+      font-size: 12px;
+    }
+
+    .jugar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 12px;
+      background: var(--color);
+      color: #121526;
+      font-size: 14px;
+      font-weight: 800;
+      transition: filter .2s;
+    }
+
+    .jugar:hover {
+      filter: brightness(1.12);
+    }
+
+    .sin-resultados {
+      padding: 44px 20px;
+      border: 1px dashed var(--borde);
+      border-radius: 20px;
+      color: var(--secundario);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .aviso {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+      padding: 22px 24px;
+      border: 1px dashed #ffffff20;
+      border-radius: 18px;
+      color: var(--secundario);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .aviso-icono {
+      flex-shrink: 0;
+      font-size: 26px;
+    }
+
+    .aviso strong {
+      color: var(--texto);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 24px;
+      border-top: 1px solid var(--borde);
+      color: var(--secundario);
+      font-size: 12px;
+    }
+
+    .solo-lectores {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (min-width: 1500px) {
+      .contenedor {
+        width: min(1380px, calc(100% - 80px));
+      }
+
+      .presentacion {
+        padding-top: 90px;
+      }
+
+      .portada {
+        height: 240px;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .juegos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .contenedor {
+        width: calc(100% - 32px);
+      }
+
+      .cabecera {
+        padding-block: 20px;
+      }
+
+      .marca {
+        font-size: 18px;
+      }
+
+      .enlace-cabecera {
+        font-size: 12px;
+      }
+
+      .presentacion {
+        padding: 48px 0 36px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .presentacion p {
+        font-size: 16px;
+      }
+
+      .barra-biblioteca {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .buscador {
+        width: 100%;
+      }
+
+      .juegos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .portada {
+        height: 190px;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Bienvenido a mi portal de Juegos H5</h1>
-    <p>Pronto encontrarás aquí una colección de juegos cooperativos web.</p>
-    <a href="https://hanstruns.github.io/Synchrony-Enlaza-tu-Mente/">Syncrhony</a>
-  <br>
-    <a href="http://codigo-secreto-kfm1.onrender.com/">Código Secreto</a>
-  <br>
-    <a href="https://hanstruns.github.io/Diana-juego-con-amigos/">Diana no eléctronica</a>
+  <header class="cabecera contenedor">
+    <a class="marca" href="./" aria-label="Mis Juegos H5, inicio">
+      <span class="marca-icono" aria-hidden="true">🎮</span>
+      <span>Mis Juegos <span>H5</span></span>
+    </a>
+
+    <a class="enlace-cabecera" href="#biblioteca">
+      Explorar juegos ↗
+    </a>
+  </header>
+
+  <main class="contenedor">
+    <section class="presentacion" aria-labelledby="titulo">
+      <div class="etiqueta">
+        <span class="punto" aria-hidden="true"></span>
+        Tu próxima partida empieza aquí
+      </div>
+
+      <h1 id="titulo">
+        Buenos amigos.<br>
+        <span>Grandes partidas.</span>
+      </h1>
+
+      <p>
+        Reúne a tu gente, elige un reto y disfruta.
+        Juegos para compartir desde el navegador, sin instalar nada.
+      </p>
+    </section>
+
+    <section class="biblioteca" id="biblioteca"
+             aria-labelledby="titulo-biblioteca">
+      <div class="barra-biblioteca">
+        <div class="titulo-biblioteca">
+          <h2 id="titulo-biblioteca">Elige tu juego</h2>
+          <span class="contador" id="contador">0</span>
+        </div>
+
+        <div class="buscador">
+          <label class="solo-lectores" for="busqueda">
+            Buscar juegos
+          </label>
+
+          <svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"></circle>
+            <path d="m16 16 4 4" stroke-linecap="round"></path>
+          </svg>
+
+          <input id="busqueda" type="search"
+                 placeholder="Busca tu próxima partida..."
+                 autocomplete="off">
+        </div>
+      </div>
+
+      <div class="filtros" id="filtros"
+           role="group" aria-label="Filtrar por categoría"></div>
+
+      <p class="solo-lectores" id="estado" role="status"></p>
+
+      <div class="juegos" id="juegos"></div>
+
+      <p class="sin-resultados" id="sin-resultados" hidden>
+        No hay juegos que coincidan con tu búsqueda.<br>
+        Prueba con otro nombre o selecciona otra categoría.
+      </p>
+
+      <noscript>
+        <p>Accede directamente a los juegos:</p>
+        <ul>
+          <li>
+            <a href="https://hanstruns.github.io/Synchrony-Enlaza-tu-Mente/">
+              Synchrony
+            </a>
+          </li>
+          <li>
+            <a href="http://codigo-secreto-kfm1.onrender.com/">
+              Código Secreto
+            </a>
+          </li>
+          <li>
+            <a href="https://hanstruns.github.io/Diana-juego-con-amigos/">
+              Diana con amigos
+            </a>
+          </li>
+        </ul>
+      </noscript>
+
+      <div class="aviso">
+        <span class="aviso-icono" aria-hidden="true">✨</span>
+        <div>
+          <strong>Siempre hay sitio para otra partida.</strong><br>
+          Aquí encontrarás los nuevos juegos que se vayan incorporando.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contenedor">
+    <span>© <span id="anio"></span> Mis Juegos H5</span>
+    <span>Menos instalaciones. Más diversión.</span>
+  </footer>
+
+  <script>
+    /*
+     * AÑADE TUS NUEVOS JUEGOS EN ESTA LISTA.
+     *
+     * Las tarjetas, los filtros y el contador se generan solos.
+     * Puedes repetir una categoría o escribir una nueva.
+     *
+     * Colores disponibles:
+     * violeta, verde, naranja, azul, rosa.
+     */
+    const juegos = [
+      {
+        nombre: "Synchrony",
+        descripcion:
+          "Enlaza tu mente con la de tus amigos. Jugad las cartas en orden y superad el reto juntos.",
+        url: "https://hanstruns.github.io/Synchrony-Enlaza-tu-Mente/",
+        categoria: "Cooperativos",
+        modalidad: "Partida online",
+        icono: "🧠",
+        color: "violeta"
+      },
+      {
+        nombre: "Código Secreto",
+        descripcion:
+          "Una pista, muchas posibilidades. Encuentra las palabras de tu equipo y evita al asesino.",
+        url: "http://codigo-secreto-kfm1.onrender.com/",
+        categoria: "Equipos",
+        modalidad: "Partida online",
+        icono: "🕵️",
+        color: "verde"
+      },
+      {
+        nombre: "Diana con amigos",
+        descripcion:
+          "Tu diana de siempre, con un marcador digital. Anota los puntos y compite con tus amigos.",
+        url: "https://hanstruns.github.io/Diana-juego-con-amigos/",
+        categoria: "Deportes",
+        modalidad: "Juego presencial",
+        icono: "🎯",
+        color: "naranja"
+      }
+
+      /*
+       * Para añadir otro juego, pon una coma después del último
+       * objeto de arriba y copia este bloque fuera del comentario:
+       *
+       * {
+       *   nombre: "Nombre del juego",
+       *   descripcion: "Una breve explicación de tu nuevo juego.",
+       *   url: "https://tu-enlace.com/",
+       *   categoria: "Estrategia",
+       *   modalidad: "Partida online",
+       *   icono: "♟️",
+       *   color: "azul"
+       * }
+       */
+    ];
+
+    const temas = {
+      violeta: {
+        color: "#baa7ff",
+        fondo: "linear-gradient(135deg, #49327e, #272348)"
+      },
+      verde: {
+        color: "#8be0bc",
+        fondo: "linear-gradient(135deg, #22594c, #193335)"
+      },
+      naranja: {
+        color: "#ffc18b",
+        fondo: "linear-gradient(135deg, #844b32, #432839)"
+      },
+      azul: {
+        color: "#8bcfff",
+        fondo: "linear-gradient(135deg, #285980, #202d4b)"
+      },
+      rosa: {
+        color: "#ffa6d5",
+        fondo: "linear-gradient(135deg, #793459, #39263f)"
+      }
+    };
+
+    const contenedorJuegos = document.getElementById("juegos");
+    const contenedorFiltros = document.getElementById("filtros");
+    const busqueda = document.getElementById("busqueda");
+    const contador = document.getElementById("contador");
+    const sinResultados = document.getElementById("sin-resultados");
+    const estado = document.getElementById("estado");
+
+    let categoriaActiva = null;
+
+    // Permite buscar palabras con o sin tildes.
+    function normalizar(texto) {
+      return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+    }
+
+    function crearElemento(etiqueta, clase, texto) {
+      const elemento = document.createElement(etiqueta);
+      if (clase) elemento.className = clase;
+      if (texto !== undefined) elemento.textContent = texto;
+      return elemento;
+    }
+
+    function crearTarjeta(juego, indice) {
+      const tema = temas[juego.color] || temas.violeta;
+
+      const tarjeta = crearElemento("article", "tarjeta");
+      tarjeta.style.setProperty("--color", tema.color);
+      tarjeta.style.setProperty("--degradado", tema.fondo);
+
+      const portada = crearElemento("div", "portada");
+      portada.setAttribute("aria-hidden", "true");
+
+      const numero = crearElemento(
+        "span",
+        "numero",
+        String(indice + 1).padStart(2, "0")
+      );
+
+      const icono = crearElemento("span", "icono-juego", juego.icono);
+      portada.append(numero, icono);
+
+      const contenido = crearElemento("div", "contenido");
+      const categoria = crearElemento("span", "categoria", juego.categoria);
+      const titulo = crearElemento("h3", "", juego.nombre);
+      const descripcion = crearElemento("p", "descripcion", juego.descripcion);
+
+      const pie = crearElemento("div", "pie-tarjeta");
+      const modalidad = crearElemento("span", "modalidad", juego.modalidad);
+      const enlace = crearElemento("a", "jugar", "Jugar →");
+
+      enlace.href = juego.url;
+      enlace.setAttribute("aria-label", `Jugar a ${juego.nombre}`);
+
+      pie.append(modalidad, enlace);
+      contenido.append(categoria, titulo, descripcion, pie);
+      tarjeta.append(portada, contenido);
+
+      return tarjeta;
+    }
+
+    function actualizarJuegos() {
+      const consulta = normalizar(busqueda.value);
+      const fragmento = document.createDocumentFragment();
+      let visibles = 0;
+
+      juegos.forEach((juego, indice) => {
+        const coincideCategoria =
+          categoriaActiva === null ||
+          juego.categoria === categoriaActiva;
+
+        const texto = normalizar(
+          `${juego.nombre} ${juego.descripcion} ${juego.categoria} ${juego.modalidad}`
+        );
+
+        if (coincideCategoria && texto.includes(consulta)) {
+          fragmento.appendChild(crearTarjeta(juego, indice));
+          visibles++;
+        }
+      });
+
+      contenedorJuegos.replaceChildren(fragmento);
+      contador.textContent = visibles;
+      sinResultados.hidden = visibles > 0;
+      estado.textContent =
+        `${visibles} ${visibles === 1 ? "juego disponible" : "juegos disponibles"}.`;
+    }
+
+    function crearFiltros() {
+      const categorias = [
+        null,
+        ...new Set(juegos.map(juego => juego.categoria))
+      ];
+
+      categorias.forEach(categoria => {
+        const boton = crearElemento(
+          "button",
+          "filtro",
+          categoria === null ? "Todos" : categoria
+        );
+
+        boton.type = "button";
+        boton.setAttribute(
+          "aria-pressed",
+          String(categoria === categoriaActiva)
+        );
+
+        boton.addEventListener("click", () => {
+          categoriaActiva = categoria;
+
+          contenedorFiltros.querySelectorAll("button").forEach(elemento => {
+            elemento.setAttribute(
+              "aria-pressed",
+              String(elemento === boton)
+            );
+          });
+
+          actualizarJuegos();
+        });
+
+        contenedorFiltros.appendChild(boton);
+      });
+    }
+
+    document.getElementById("anio").textContent = new Date().getFullYear();
+    busqueda.addEventListener("input", actualizarJuegos);
+
+    crearFiltros();
+    actualizarJuegos();
+  </script>
 </body>
 </html>
